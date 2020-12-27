@@ -5,9 +5,12 @@
  */
 var convert = function (s, numRows) {
   let array = [];
+  if (numRows === 1) {
+    return s;
+  }
   for (let j = 0; j < numRows; j++) {
-    for (let i = 0; i < s.length / (numRows * 2 - 1); i++) {
-      if (j == 0 || j == numRows) {
+    for (let i = 0; i < s.length / (numRows * 2 - 2); i++) {
+      if (j == 0 || j == numRows - 1) {
         array.push(
           s.slice(j + i * (numRows * 2 - 2), j + i * (numRows * 2 - 2) + 1)
         );
@@ -16,12 +19,14 @@ var convert = function (s, numRows) {
           s.slice(j + i * (numRows - 1) * 2, j + i * (numRows - 1) * 2 + 1)
         );
         array.push(
-          s.slice(j + i * (numRows - 1) * 2, j + i * (numRows - 1) * 2 + 1)
+          s.slice(
+            j + i * (numRows - 1) * 2 + (numRows - j - 1) * 2,
+            j + i * (numRows - 1) * 2 + (numRows - j - 1) * 2 + 1
+          )
         );
       }
     }
   }
-
-  console.log(array);
+  return array.join("");
 };
-convert("LEETCODEISHIRING", 3);
+console.log(convert("PAYPALISHIRING", 3));
