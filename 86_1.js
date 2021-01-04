@@ -14,34 +14,33 @@ var partition = function (head, x) {
   let curNode = head;
   let preNode;
   let preLessNode;
-  while (curNode.next != null) {
+  let res = head;
+  while (curNode != null) {
     if (curNode.val < x) {
-      console.log(curNode, preNode, preLessNode);
       if (!preNode) {
         preNode = curNode;
         preLessNode = curNode;
         curNode = curNode.next;
       } else {
         if (!preLessNode) {
-          let tempNode = head;
-          preLessNode = curNode;
-          preLessNode.next = tempNode;
+          let tempNode = new ListNode(curNode.val);
+          tempNode.next = head;
+          preLessNode = tempNode;
+          res = preLessNode;
         } else {
-          let tempNode = preLessNode.next;
-          preLessNode.next = curNode;
-          preLessNode = curNode;
+          let tempNode = new ListNode(curNode.val);
+          tempNode.next = preLessNode.next;
           preLessNode.next = tempNode;
+          preLessNode = tempNode;
         }
         preNode.next = curNode.next;
-        preNode = curNode.next;
         curNode = curNode.next;
       }
     } else {
       preNode = curNode;
       curNode = curNode.next;
     }
-    // console.log(curNode, preNode);
   }
-  return head;
+  return res;
 };
-partition([1, 4, 3, 2, 5, 2], 3);
+// partition([1, 4, 3, 2, 5, 2], 3);
