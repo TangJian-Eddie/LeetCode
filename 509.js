@@ -15,4 +15,3 @@ var fib = function (n) {
   }
   return Fibonacci2(n)
 };
-console.log(fib(4));
